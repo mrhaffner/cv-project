@@ -16,25 +16,15 @@ class General extends Component {
             genPhone: '',
           }
         }
-      
-        handleGenName = (e) => {
+
+        handleInputChange = (e) => {
+          const value = e.target.value
+          const name = e.target.name
           this.setState({
-            genName: e.target.value,
-          });
-        };
-      
-        handleGenEmail = (e) => {
-          this.setState({
-            genEmail: e.target.value,
-          });
-        };
-      
-        handleGenPhone = (e) => {
-          this.setState({
-            genPhone: e.target.value,
-          });
-        };
-      
+            [name]: value
+          })
+        }
+
         onSubmitGen = (e) => {
           e.preventDefault();
           const { genName, genEmail, genPhone } = this.state
@@ -60,24 +50,24 @@ class General extends Component {
                 genEmail: email,
                 genPhone: phone,
             });
-            
           };
   
     genForm = () => {
-        return (
-            <div>
-                <h3>General Infromation</h3>
-                <form onSubmit={this.onSubmitGen}>
-                    <label htmlFor="">Name</label><br/>
-                    <input type="text" onChange={this.handleGenName}  value={this.state.genName} /><br/>
-                    <label htmlFor="">Email</label><br/>
-                    <input type="text" onChange={this.handleGenEmail} value={this.state.genEmail} /><br/>
-                    <label htmlFor="">Phone Number</label><br/>
-                    <input type="text" onChange={this.handleGenPhone} value={this.state.genPhone} /><br/>
-                    <button>Submit</button>
-                </form>
-            </div>
-        )
+      const { genName, genEmail, genPhone } = this.state
+      return (
+          <div>
+              <h3>General Infromation</h3>
+              <form onSubmit={this.onSubmitGen}>
+                  <label htmlFor="">Name</label><br/>
+                  <input type="text" onChange={this.handleInputChange} value={genName} name='genName' /><br/>
+                  <label htmlFor="">Email</label><br/>
+                  <input type="text" onChange={this.handleInputChange} value={genEmail} name='genEmail' /><br/>
+                  <label htmlFor="">Phone Number</label><br/>
+                  <input type="text" onChange={this.handleInputChange} value={genPhone} name='genPhone' /><br/>
+                  <button>Submit</button>
+              </form>
+          </div>
+      )
     }
 
     genFill = () => {
