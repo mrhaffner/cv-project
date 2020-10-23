@@ -17,6 +17,7 @@ const EducationFill = (props) => {
                 </div>
                 {/* );
             })} */}
+            <button>New Education</button>
         </div>
     )
 }

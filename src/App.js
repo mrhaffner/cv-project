@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import General from './components/General.js';
 import Experience from './components/Experience.js';
 import Education from './components/Education.js';
-import GeneralFill from './components/GeneralFill.js';
 import ExperienceFill from './components/ExperienceFill.js';
 import EducationFill from './components/EducationFill.js';
 
@@ -11,12 +10,13 @@ class App extends Component {
     super(props);
   }
 
+  //object factory for exp/edu?
+
   render() {
     return (
       <div>
         <h1>CV</h1>
         <General />
-        <GeneralFill />
         <Experience />
         <ExperienceFill />
         <Education />
@@ -24,7 +24,6 @@ class App extends Component {
       </div>
     )
   }
-  
 }
 
 export default App;

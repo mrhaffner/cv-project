@@ -18,6 +18,7 @@ const ExperienceFill = (props) => {
                 </div>
                 {/* );
             })} */}
+            <button>New Experience</button>
         </div>
     )
 }
