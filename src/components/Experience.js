@@ -5,14 +5,10 @@ class Experience extends Component {
         super(props);
 
         this.state = {
-            exp: {
-              name: '',
-              title: '',
-              tasks: '',
-              start: '',
-              end: '',
-            },
+            exp: [],
             expDisplay: true,
+            expNewForm: false,
+            expNewBtn: false,
             expName: '',
             expTitle: '',
             expTasks: '',
@@ -23,6 +19,7 @@ class Experience extends Component {
           this.handleInputChange = this.handleInputChange.bind(this);
           this.onSubmitExp = this.onSubmitExp.bind(this);
           this.onEdit = this.onEdit.bind(this);
+          this.onNew = this.onNew.bind(this);
         }
 
         handleInputChange = (e) => {
@@ -33,30 +30,44 @@ class Experience extends Component {
           })
         }
 
+        //factory to go below
+        expFactory = (name, title, tasks, start, end) => {
+          return { name, title, tasks, start, end }
+        }
+
         onSubmitExp = (e) => {
           e.preventDefault();
-          const { expName, expTitle, expTasks, expStart, expEnd } = this.state
+          const { expName, expTitle, expTasks, expStart, expEnd, exp } = this.state
           this.setState({
-            exp: {
+            exp: [
+              ...exp, 
+              {
               name: expName,
               title: expTitle,
               tasks: expTasks,
               start: expStart,
               end: expEnd,
-            },
+              }
+            ],
             expName: '',
             expTitle: '',
             expTasks: '',
             expStart: '',
             expEnd: '',
           });
-          this.setState({expDisplay: false})
+          this.setState({
+            expDisplay: false,
+            expNewBtn: true,
+          });
         };
 
         onEdit = (e) => {
             e.preventDefault();
-            const { name, title, tasks, start, end } = this.state.exp
-            this.setState({expDisplay: true})
+            const { name, title, tasks, start, end } = this.state.exp // add position based on object key with [1]
+            this.setState({
+              expDisplay: true,
+              expNewBtn: false,
+            })
             this.setState({
                 expName: name,
                 expTitle: title,
@@ -65,6 +76,13 @@ class Experience extends Component {
                 expEnd: end,
             });
           };
+
+        onNew = (e) => {
+          this.setState({
+            expNewBtn: false,
+            expNewForm: true,
+          })
+        }
   
     expForm = () => {
       const { expName, expTitle, expTasks, expStart, expEnd } = this.state
@@ -89,23 +107,21 @@ class Experience extends Component {
     }
 
     expFill = () => {
-        const { name, title, tasks, start, end } = this.state.exp;
+        const { exp } = this.state;
         return (
             <div>
-            {/* {tasks.map((task, index) => {
-
-            return ( */}
+            {exp.map((x) => {
+              return (
                 <div>
-                    <h3>{name}</h3>
-                    <button onClick={this.onEdit}>Edit</button>
-                    <p>{title}</p>
-                    <p>{tasks}</p>
-                    <p>{start}</p>
-                    <p>{end}</p>
+                  <h3>{x.name}</h3>
+                  <button onClick={this.onEdit}>Edit</button>
+                  <p>{x.title}</p>
+                  <p>{x.tasks}</p>
+                  <p>{x.start}</p>
+                  <p>{x.end}</p>
                 </div>
-                {/* );
-            })} */}
-                <button>New Experience</button>
+              );
+            })}
             </div>
         )
     }
@@ -117,8 +133,28 @@ class Experience extends Component {
         )
     }
 
+    newBtn = () => {
+      const { expNewBtn } = this.state;
+      return (
+        expNewBtn ? <button onClick={this.onNew}>New Experience</button> : null
+      )
+    }
+
+    newForm = () => {
+      const { expNewForm } = this.state;
+      return (
+        expNewForm ? <this.expForm /> : null
+      )
+    }
+
     render() {
-        return (<this.expDOM />)
+        return (
+        <div>
+          <this.expDOM />
+          <this.newBtn />
+          <this.newForm />
+          </div>
+        )
     }
 }
 
