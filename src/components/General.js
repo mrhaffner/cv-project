@@ -14,7 +14,11 @@ class General extends Component {
             genName: '',
             genEmail: '',
             genPhone: '',
-          }
+          };
+
+          this.handleInputChange = this.handleInputChange.bind(this);
+          this.onSubmitGen = this.onSubmitGen.bind(this);
+          this.onEdit = this.onEdit.bind(this);
         }
 
         handleInputChange = (e) => {

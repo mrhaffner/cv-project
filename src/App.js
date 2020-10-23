@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import General from './components/General.js';
 import Experience from './components/Experience.js';
 import Education from './components/Education.js';
-import ExperienceFill from './components/ExperienceFill.js';
 import EducationFill from './components/EducationFill.js';
 
 class App extends Component {
@@ -18,10 +17,10 @@ class App extends Component {
         <h1>CV</h1>
         <General />
         <Experience />
-        <ExperienceFill />
         <Education />
         <EducationFill />
       </div>
+      
     )
   }
 }
