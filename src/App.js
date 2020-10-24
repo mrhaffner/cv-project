@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import General from './components/General.js';
 import Experience from './components/Experience.js';
 import Education from './components/Education.js';
-import EducationFill from './components/EducationFill.js';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   //object factory for exp/edu?
 
@@ -18,7 +17,6 @@ class App extends Component {
         <General />
         <Experience />
         <Education />
-        <EducationFill />
       </div>
       
     )
