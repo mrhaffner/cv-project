@@ -132,20 +132,20 @@ class Experience extends Component {
   expForm = () => {
     const { expName, expTitle, expTasks, expStart, expEnd, expEdit } = this.state
     return (
-      <div key={uniqid()}>
-        <h3 key={uniqid()}>Experience</h3>
-        <form onSubmit={expEdit === '' ? this.onSubmitExp : this.onUpdateExp} id={expEdit ? expEdit : null} key={uniqid()}> {/* Maybe have this hidden until until New Company btn is pressed */}
-          <label htmlFor="" key={uniqid()}>Company Name</label><br/> 
-          <input type="text" onChange={this.handleInputChange} value={expName} name='expName' key={uniqid()} /><br/>
-          <label htmlFor="" key={uniqid()}>Position Title</label><br/>
-          <input type="text" onChange={this.handleInputChange} value={expTitle} name='expTitle' key={uniqid()} /><br/>
-          <label htmlFor="" key={uniqid()}>Main Tasks</label><br/>
-          <input type="text" onChange={this.handleInputChange} value={expTasks} name='expTasks' key={uniqid()} /><br/>
-          <label htmlFor="" key={uniqid()}>Start Date</label><br/>
-          <input type="date" onChange={this.handleInputChange} value={expStart} name='expStart' key={uniqid()} /><br/>
-          <label htmlFor="" key={uniqid()}>End Date</label><br/>
-          <input type="date" onChange={this.handleInputChange} value={expEnd} name='expEnd' key={uniqid()} /><br/>
-          <button key={uniqid()}>{expEdit === '' ? 'Submit' : 'Update'}</button> {/* does this need to have a key? */}
+      <div >
+        <h3 >Experience</h3>
+        <form onSubmit={expEdit === '' ? this.onSubmitExp : this.onUpdateExp} id={expEdit ? expEdit : null} > {/* Maybe have this hidden until until New Company btn is pressed */}
+          <label htmlFor="" >Company Name</label><br/> 
+          <input type="text" onChange={this.handleInputChange} value={expName} name='expName'  /><br/>
+          <label htmlFor="" >Position Title</label><br/>
+          <input type="text" onChange={this.handleInputChange} value={expTitle} name='expTitle'  /><br/>
+          <label htmlFor="" >Main Tasks</label><br/>
+          <input type="text" onChange={this.handleInputChange} value={expTasks} name='expTasks'  /><br/>
+          <label htmlFor="" >Start Date</label><br/>
+          <input type="date" onChange={this.handleInputChange} value={expStart} name='expStart'  /><br/>
+          <label htmlFor="" >End Date</label><br/>
+          <input type="date" onChange={this.handleInputChange} value={expEnd} name='expEnd'  /><br/>
+          <button >{expEdit === '' ? 'Submit' : 'Update'}</button> {/* does this need to have a key? */}
         </form>
       </div>
     )
@@ -154,21 +154,21 @@ class Experience extends Component {
   expFill = () => {
     const { exp, expEdit } = this.state;
     return (
-      <div key={uniqid()}>
+      <div >
         {exp.map((x) => {
           if (expEdit === x.key) {
             return (
-              <this.expForm /> //change this to be a new special Edit Form
+              <this.expForm   /> //change this to be a new special Edit Form
             );
           } else {
           return (
             <div key={uniqid()}>
-              <h3 key={uniqid()}>{x.name}</h3>
-              <button key={uniqid()} onClick={this.onEdit} id={x.key}>Edit</button>
-              <p key={uniqid()}>{x.title}</p>
-              <p key={uniqid()}>{x.tasks}</p>
-              <p key={uniqid()}>{x.start}</p>
-              <p key={uniqid()}>{x.end}</p>
+              <h3 >{x.name}</h3>
+              <button  onClick={this.onEdit} id={x.key}>Edit</button>
+              <p >{x.title}</p>
+              <p >{x.tasks}</p>
+              <p >{x.start}</p>
+              <p >{x.end}</p>
             </div>
           );
         }
@@ -187,7 +187,7 @@ class Experience extends Component {
   newBtn = () => {
     const { expNewBtn } = this.state;
     return (
-      expNewBtn ? <button onClick={this.onNew} key={uniqid()}>New Experience</button> : null
+      expNewBtn ? <button onClick={this.onNew} >New Experience</button> : null
     )
   }
 
@@ -200,10 +200,10 @@ class Experience extends Component {
 
   render() {
     return (
-    <div key={uniqid()}>
-      <this.expDOM />
-      <this.newBtn />
-      <this.newForm />
+      <div >
+        <this.expDOM />
+        <this.newBtn />
+        <this.newForm />
       </div>
     )
   }

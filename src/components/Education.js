@@ -126,18 +126,18 @@ class Education extends Component {
   eduForm = () => {
     const { eduName, eduTitle, eduStart, eduEnd, eduEdit } = this.state
     return (
-      <div key={uniqid()}>
-        <h3 key={uniqid()}>Education</h3>
-        <form onSubmit={eduEdit === '' ? this.onSubmitedu : this.onUpdateedu} id={eduEdit ? eduEdit : null} key={uniqid()}> {/* Maybe have this hidden until until New Company btn is pressed */}
-          <label htmlFor="" key={uniqid()}>School Name</label><br/> 
-          <input type="text" onChange={this.handleInputChange} value={eduName} name='eduName' key={uniqid()} /><br/>
-          <label htmlFor="" key={uniqid()}>Title of Study</label><br/>
-          <input type="text" onChange={this.handleInputChange} value={eduTitle} name='eduTitle' key={uniqid()} /><br/>
-          <label htmlFor="" key={uniqid()}>Start Date</label><br/>
-          <input type="date" onChange={this.handleInputChange} value={eduStart} name='eduStart' key={uniqid()} /><br/>
-          <label htmlFor="" key={uniqid()}>End Date</label><br/>
-          <input type="date" onChange={this.handleInputChange} value={eduEnd} name='eduEnd' key={uniqid()} /><br/>
-          <button key={uniqid()}>{eduEdit === '' ? 'Submit' : 'Update'}</button> {/* does this need to have a key? */}
+      <div >
+        <h3 >Education</h3>
+        <form onSubmit={eduEdit === '' ? this.onSubmitedu : this.onUpdateedu} id={eduEdit ? eduEdit : null} > {/* Maybe have this hidden until until New Company btn is pressed */}
+          <label htmlFor="" >School Name</label><br/> 
+          <input type="text" onChange={this.handleInputChange} value={eduName} name='eduName'  /><br/>
+          <label htmlFor="" >Title of Study</label><br/>
+          <input type="text" onChange={this.handleInputChange} value={eduTitle} name='eduTitle'  /><br/>
+          <label htmlFor="" >Start Date</label><br/>
+          <input type="date" onChange={this.handleInputChange} value={eduStart} name='eduStart'  /><br/>
+          <label htmlFor="" >End Date</label><br/>
+          <input type="date" onChange={this.handleInputChange} value={eduEnd} name='eduEnd'  /><br/>
+          <button >{eduEdit === '' ? 'Submit' : 'Update'}</button> {/* does this need to have a key? */}
         </form>
       </div>
     )
@@ -146,20 +146,20 @@ class Education extends Component {
   eduFill = () => {
     const { edu, eduEdit } = this.state;
     return (
-      <div key={uniqid()}>
+      <div >
         {edu.map((x) => {
           if (eduEdit === x.key) {
             return (
-              <this.eduForm /> //change this to be a new special Edit Form
+              <this.eduForm key={uniqid()} /> //change this to be a new special Edit Form
             );
           } else {
           return (
             <div key={uniqid()}>
-              <h3 key={uniqid()}>{x.name}</h3>
-              <button key={uniqid()} onClick={this.onEdit} id={x.key}>Edit</button>
-              <p key={uniqid()}>{x.title}</p>
-              <p key={uniqid()}>{x.start}</p>
-              <p key={uniqid()}>{x.end}</p>
+              <h3 >{x.name}</h3>
+              <button  onClick={this.onEdit} id={x.key}>Edit</button>
+              <p >{x.title}</p>
+              <p >{x.start}</p>
+              <p >{x.end}</p>
             </div>
           );
         }
@@ -178,7 +178,7 @@ class Education extends Component {
   newBtn = () => {
     const { eduNewBtn } = this.state;
     return (
-      eduNewBtn ? <button onClick={this.onNew} key={uniqid()}>New Education</button> : null
+      eduNewBtn ? <button onClick={this.onNew} >New Education</button> : null
     )
   }
 
@@ -191,7 +191,7 @@ class Education extends Component {
 
   render() {
     return (
-    <div key={uniqid()}>
+    <div >
       <this.eduDOM />
       <this.newBtn />
       <this.newForm />
