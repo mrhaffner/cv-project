@@ -131,7 +131,7 @@ class Experience extends Component {
       <div >
         {expDisplay ? <ExpForm expName={expName} expTitle={expTitle} expTasks={expTasks} expStart={expStart} expEnd={expEnd} expEdit={expEdit} onUpdateExp={this.onUpdateExp} onSubmitExp={this.onSubmitExp} handleInputChange={this.handleInputChange} /> 
           : <ExpFill exp={exp} expName={expName} expTitle={expTitle} expTasks={expTasks} expStart={expStart} expEnd={expEnd} expEdit={expEdit} onUpdateExp={this.onUpdateExp} onSubmitExp={this.onSubmitExp} handleInputChange={this.handleInputChange} onEdit={this.onEdit} />}
-        {expNewBtn ? <button onClick={this.onNew} >New Experience</button> : null}
+        {expNewBtn ? <button onClick={this.onNew}>New Experience</button> : null}
         {expNewForm ? <ExpForm expName={expName} expTitle={expTitle} expTasks={expTasks} expStart={expStart} expEnd={expEnd} expEdit={expEdit} onUpdateExp={this.onUpdateExp} onSubmitExp={this.onSubmitExp} handleInputChange={this.handleInputChange}/> 
           : null}
       </div>
