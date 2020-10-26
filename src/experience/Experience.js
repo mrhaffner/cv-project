@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ExpFill from './ExpFill'
 import uniqid from 'uniqid';
 import ExpForm from './ExpForm'
-
 class Experience extends Component {
   constructor(props) {
     super(props);
@@ -114,6 +113,7 @@ class Experience extends Component {
       expEnd: end,
       expEdit: editID,
       newDisplay: false,
+      expNewForm: false,
     });
   };
 
