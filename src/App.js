@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import General from './components/General.js';
+import General from './general/General.js';
 import Experience from './components/Experience.js';
 import Education from './components/Education.js';
 
