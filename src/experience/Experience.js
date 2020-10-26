@@ -7,7 +7,7 @@ class Experience extends Component {
 
     this.state = {
       exp: [],
-      expDisplay: true, //does this need to go within the object???
+      expDisplay: true,
       expNewForm: false,
       expNewBtn: false,
       expEdit: '',
@@ -38,9 +38,6 @@ class Experience extends Component {
     return { name, title, tasks, start, end, key }
   }
 
-  //how does this know which object in the array to fill from, edit and replace and how does it do that?
-  //could add a state to make add object to end of array or changing it conditional
-    //or just add a different function for edit instead of submit
   onSubmitExp = (e) => {
     e.preventDefault();
     const { expName, expTitle, expTasks, expStart, expEnd, exp, } = this.state
@@ -63,7 +60,7 @@ class Experience extends Component {
       expEnd: '',
     });
     this.setState({ 
-      expDisplay: false, //does this need to go within the object???
+      expDisplay: false,
       expNewBtn: true,
       expNewForm: false,
     });
@@ -80,7 +77,7 @@ class Experience extends Component {
           x.tasks = expTasks;
           x.start = expStart;
           x.end = expEnd;
-          return x; //maybe return the whole thing in ()?
+          return x;
         } else {
           return x;
         }
@@ -103,13 +100,10 @@ class Experience extends Component {
     e.preventDefault();
     const index = this.findIndex(e);
     const editID = e.target.id
-    // function/const to get position of object in array and then add to line below - maybe function is not in in this function
-    const { name, title, tasks, start, end } = this.state.exp[index] // add position based on object key with [1]
+    const { name, title, tasks, start, end } = this.state.exp[index]
     this.setState({
-      // expDisplay: true, //need to figure out something for this
       expNewBtn: false,
     })
-    //this needs to input the values from the correct object or apparantly it already does that somehow
     this.setState({
       expName: name,
       expTitle: title,
@@ -134,7 +128,7 @@ class Experience extends Component {
     return (
       <div >
         <h3 >Experience</h3>
-        <form onSubmit={expEdit === '' ? this.onSubmitExp : this.onUpdateExp} id={expEdit ? expEdit : null} > {/* Maybe have this hidden until until New Company btn is pressed */}
+        <form onSubmit={expEdit === '' ? this.onSubmitExp : this.onUpdateExp} id={expEdit ? expEdit : null} >
           <label htmlFor="" >Company Name</label><br/> 
           <input type="text" onChange={this.handleInputChange} value={expName} name='expName'  /><br/>
           <label htmlFor="" >Position Title</label><br/>
@@ -145,7 +139,7 @@ class Experience extends Component {
           <input type="date" onChange={this.handleInputChange} value={expStart} name='expStart'  /><br/>
           <label htmlFor="" >End Date</label><br/>
           <input type="date" onChange={this.handleInputChange} value={expEnd} name='expEnd'  /><br/>
-          <button >{expEdit === '' ? 'Submit' : 'Update'}</button> {/* does this need to have a key? */}
+          <button >{expEdit === '' ? 'Submit' : 'Update'}</button>
         </form>
       </div>
     )
@@ -158,7 +152,7 @@ class Experience extends Component {
         {exp.map((x) => {
           if (expEdit === x.key) {
             return (
-              <this.expForm   /> //change this to be a new special Edit Form
+              <this.expForm   />
             );
           } else {
           return (
@@ -180,7 +174,7 @@ class Experience extends Component {
   expDOM = () => {
     const { expDisplay } = this.state;
     return (
-        expDisplay ? <this.expForm /> : <this.expFill /> //might need to change if expDisplay goes into object
+        expDisplay ? <this.expForm /> : <this.expFill />
     )
   }
 

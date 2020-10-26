@@ -1,7 +1,7 @@
 import React from 'react';
 import General from './general/General.js';
-import Experience from './components/Experience.js';
-import Education from './components/Education.js';
+import Experience from './experience/Experience.js';
+import Education from './education/Education.js';
 
 const App = () => {
   return (
