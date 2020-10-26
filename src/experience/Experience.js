@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ExpForm from './ExpForm'
 import uniqid from 'uniqid';
 
 class Experience extends Component {
@@ -123,36 +124,36 @@ class Experience extends Component {
     })
   }
 
-  expForm = () => {
-    const { expName, expTitle, expTasks, expStart, expEnd, expEdit } = this.state
-    return (
-      <div >
-        <h3 >Experience</h3>
-        <form onSubmit={expEdit === '' ? this.onSubmitExp : this.onUpdateExp} id={expEdit ? expEdit : null} >
-          <label htmlFor="" >Company Name</label><br/> 
-          <input type="text" onChange={this.handleInputChange} value={expName} name='expName'  /><br/>
-          <label htmlFor="" >Position Title</label><br/>
-          <input type="text" onChange={this.handleInputChange} value={expTitle} name='expTitle'  /><br/>
-          <label htmlFor="" >Main Tasks</label><br/>
-          <input type="text" onChange={this.handleInputChange} value={expTasks} name='expTasks'  /><br/>
-          <label htmlFor="" >Start Date</label><br/>
-          <input type="date" onChange={this.handleInputChange} value={expStart} name='expStart'  /><br/>
-          <label htmlFor="" >End Date</label><br/>
-          <input type="date" onChange={this.handleInputChange} value={expEnd} name='expEnd'  /><br/>
-          <button >{expEdit === '' ? 'Submit' : 'Update'}</button>
-        </form>
-      </div>
-    )
-  }
+  // expForm = () => {
+  //   const { expName, expTitle, expTasks, expStart, expEnd, expEdit } = this.state
+  //   return (
+  //     <div >
+  //       <h3 >Experience</h3>
+  //       <form onSubmit={expEdit === '' ? this.onSubmitExp : this.onUpdateExp} id={expEdit ? expEdit : null} >
+  //         <label htmlFor="" >Company Name</label><br/> 
+  //         <input type="text" onChange={this.handleInputChange} value={expName} name='expName'  /><br/>
+  //         <label htmlFor="" >Position Title</label><br/>
+  //         <input type="text" onChange={this.handleInputChange} value={expTitle} name='expTitle'  /><br/>
+  //         <label htmlFor="" >Main Tasks</label><br/>
+  //         <input type="text" onChange={this.handleInputChange} value={expTasks} name='expTasks'  /><br/>
+  //         <label htmlFor="" >Start Date</label><br/>
+  //         <input type="date" onChange={this.handleInputChange} value={expStart} name='expStart'  /><br/>
+  //         <label htmlFor="" >End Date</label><br/>
+  //         <input type="date" onChange={this.handleInputChange} value={expEnd} name='expEnd'  /><br/>
+  //         <button >{expEdit === '' ? 'Submit' : 'Update'}</button>
+  //       </form>
+  //     </div>
+  //   )
+  // }
 
   expFill = () => {
-    const { exp, expEdit } = this.state;
+    const { exp, expEdit, expName, expTitle, expTasks, expStart, expEnd, } = this.state;
     return (
       <div >
         {exp.map((x) => {
           if (expEdit === x.key) {
             return (
-              <this.expForm   />
+              <ExpForm key={uniqid()} expName={expName} expTitle={expTitle} expTasks={expTasks} expStart={expStart} expEnd={expEnd} expEdit={expEdit} onUpdateExp={this.onUpdateExp} onSubmitExp={this.onSubmitExp} handleInputChange={this.handleInputChange} />
             );
           } else {
           return (
@@ -172,9 +173,9 @@ class Experience extends Component {
   }
 
   expDOM = () => {
-    const { expDisplay } = this.state;
+    const { expDisplay, expName, expTitle, expTasks, expStart, expEnd, expEdit } = this.state;
     return (
-        expDisplay ? <this.expForm /> : <this.expFill />
+        expDisplay ? <ExpForm expName={expName} expTitle={expTitle} expTasks={expTasks} expStart={expStart} expEnd={expEnd} expEdit={expEdit} onUpdateExp={this.onUpdateExp} onSubmitExp={this.onSubmitExp} handleInputChange={this.handleInputChange} /> : <this.expFill />
     )
   }
 
@@ -186,9 +187,9 @@ class Experience extends Component {
   }
 
   newForm = () => {
-    const { expNewForm } = this.state;
+    const { expNewForm, expName, expTitle, expTasks, expStart, expEnd, expEdit } = this.state;
     return (
-      expNewForm ? <this.expForm /> : null
+      expNewForm ? <ExpForm expName={expName} expTitle={expTitle} expTasks={expTasks} expStart={expStart} expEnd={expEnd} expEdit={expEdit} onUpdateExp={this.onUpdateExp} onSubmitExp={this.onSubmitExp} handleInputChange={this.handleInputChange} /> : null
     )
   }
 
