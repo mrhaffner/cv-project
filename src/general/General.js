@@ -6,90 +6,51 @@ const General = () => {
   const [nameG, setNameG] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [nameInput, setNameInput] = useState('')
-  const [emailInput, setEmailInput] = useState('')
-  const [phoneInput, setPhoneInput] = useState('')
   const [display, setDisplay] = useState(true)
-  // const [gen, setGen] = useState(
-  //   {
-  //     name: '',
-  //     email: '',
-  //     phone: '',
-  //   }
-  // )
+  const [input, setInput] = useState(
+    {
+      nameInput: '',
+      emailInput: '',
+      phoneInput: '',
+    }
+  )
 
-  //const { name, email, phone } = gen
-
-  // const [input, setInput] = useState(
-  //   {
-  //     nameInput: '',
-  //     emailInput: '',
-  //     phoneInput: '',
-  //   }
-  // )
-  
-  //const { nameInput, emailInput, phoneInput } = input
-
-  // const handleInputChange = (e) => {
-  //   const value = e.target.value;
-  //   const names = e.target.name;
-  //   setInput({
-  //     [names]: value
-  //   })
-  // }
-
-  const handleInputName = (e) => {
-      const value = e.target.value;
-      setNameInput(value)
-  }
-
-  const handleInputEmail = (e) => {
+  const handleInputChange = (e) => {
     const value = e.target.value;
-    setEmailInput(value)
+    const name = e.target.name;
+    setInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
   }
 
-  const handleInputPhone = (e) => {
-    const value = e.target.value;
-    setPhoneInput(value)
-  }
+  const { nameInput, emailInput, phoneInput } = input
 
   const onSubmitGen = (e) => {
     e.preventDefault();
     setNameG(nameInput);
     setEmail(emailInput);
     setPhone(phoneInput);
-    // setGen({
-    //   name: nameInput,
-    //   email: emailInput,
-    //   phone: phoneInput,
-    // })
-    // setInput({
-    //   nameInput: '',
-    //   emailInput: '',
-    //   phoneInput: '',
-    // })
-    setNameInput('');
-    setEmailInput('');
-    setPhoneInput('');
+    setInput({
+      nameInput: '',
+      emailInput: '',
+      phoneInput: '',
+    })
     setDisplay(false);
   };
 
   const onEdit = (e) => {
     e.preventDefault();
     setDisplay(true);
-    setNameInput(nameG);
-    setEmailInput(email);
-    setPhoneInput(phone);
-    // setInput({
-    //   nameInput: name,
-    //   emailInput: email,
-    //   phoneInput: phone,
-    // })
+    setInput({
+      nameInput: nameG,
+      emailInput: email,
+      phoneInput: phone,
+    })
   };
 
   return (
-    
-      display ? <GenForm nameInput={nameInput} emailInput={emailInput} phoneInput={phoneInput} handleInputName={handleInputName} handleInputPhone={handleInputPhone} handleInputEmail={handleInputEmail} onSubmitGen={onSubmitGen} /> 
+      display ? <GenForm nameInput={nameInput} emailInput={emailInput} phoneInput={phoneInput} handleInputChange={handleInputChange} onSubmitGen={onSubmitGen} /> 
         : <GenFill nameG={nameG} email={email} phone={phone} onEdit={onEdit} />
   )
 }
