@@ -1,136 +1,125 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import EduFill from './EduFill'
 import uniqid from 'uniqid';
 import EduForm from './EduForm'
-class Education extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      edu: [],
-      eduDisplay: true,
-      eduNewForm: false,
-      eduNewBtn: false,
-      eduEdit: '',
-      eduName: '',
-      eduTitle: '',
-      eduStart: '',
-      eduEnd: '',
-    };
+const Education = () => {
+  const [edu, setEdu] = useState([]);
+  const [nameInput, setNameInput] = useState('');
+  const [titleInput, setTitleInput] = useState('');
+  const [startInput, setStartInput] = useState('');
+  const [endInput, setEndInput] = useState('')
+  const [display, setDisplay] = useState(true);
+  const [newForm, setNewForm] = useState(false);
+  const [newBtn, setNewBtn] = useState(false);
+  const [eduEdit, setEduEdit] = useState('');
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.onSubmitEdu = this.onSubmitEdu.bind(this);
-    this.onEdit = this.onEdit.bind(this);
-    this.onNew = this.onNew.bind(this);
-    this.findIndex = this.findIndex.bind(this);
-    this.onUpdateEdu = this.onUpdateEdu.bind(this);
+  const handleInputName = (e) => {
+    const value = e.target.value;
+    setNameInput(value)
   }
 
-  handleInputChange = (e) => {
-    const value = e.target.value
-    const name = e.target.name
-    this.setState({
-      [name]: value
-    })
+  const handleInputTitle = (e) => {
+    const value = e.target.value;
+    setTitleInput(value)
   }
 
-  eduFactory = (name, title, start, end, key) => {
-    return { name, title, start, end, key }
+  const handleInputStart = (e) => {
+    const value = e.target.value;
+    setStartInput(value)
   }
 
-  onSubmitEdu = (e) => {
+  const handleInputEnd = (e) => {
+    const value = e.target.value;
+    setEndInput(value)
+  }
+
+  //apparantly I never used this?
+  // const eduFactory = (name, title, start, end, key) => {
+  //   return { name, title, start, end, key }
+  // }
+
+  const onSubmitEdu = (e) => {
     e.preventDefault();
-    const { eduName, eduTitle, eduStart, eduEnd, edu, } = this.state
-    this.setState({
-      edu: [
-        ...edu, 
-        {
-        name: eduName,
-        title: eduTitle,
-        start: eduStart,
-        end: eduEnd,
-        key: uniqid(),
-        }
-      ],
-      eduName: '',
-      eduTitle: '',
-      eduStart: '',
-      eduEnd: '',
-    });
-    this.setState({ 
-      eduDisplay: false,
-      eduNewBtn: true,
-      eduNewForm: false,
-    });
+    //this probably won't work properly with hooks or is it the solution to merging state?
+    setEdu([
+      ...edu, 
+      {
+      name: nameInput,
+      title: titleInput,
+      start: startInput,
+      end: endInput,
+      key: uniqid(),
+      }
+    ]);
+    setNameInput('');
+    setTitleInput('');
+    setStartInput('');
+    setEndInput('');
+    setDisplay(false);
+    setNewBtn(true);
+    setNewForm(false);
   };
 
-  onUpdateEdu = (e) => {
+  const onUpdateEdu = (e) => {
     e.preventDefault();
-    const { eduName, eduTitle, eduStart, eduEnd, edu, } = this.state
-    this.setState({
-      edu: edu.map(x => {
-        if (x.key === e.target.id) {
-          x.name = eduName;
-          x.title = eduTitle;
-          x.start = eduStart;
-          x.end = eduEnd;
-          return x;
-        } else {
-          return x;
-        }
-      }),
-      eduEdit: '',
-      eduNewBtn: true,
-      eduName: '',
-      eduTitle: '',
-      eduStart: '',
-      eduEnd: '',
-    })
+    // this probably won't work, needs to merge previous states, also not sure about the 'edu.map'
+    setEdu(edu.map(x => {
+      if (x.key === e.target.id) {
+        x.name = nameInput;
+        x.title = titleInput;
+        x.start = startInput;
+        x.end = endInput;
+        return x;
+      } else {
+        return x;
+      }
+    }))
+    setNameInput('');
+    setTitleInput('');
+    setStartInput('');
+    setEndInput('');
+    setNewBtn(true);
+    setEduEdit('');
   }
 
-  findIndex = (e) => {
-    return this.state.edu.findIndex(x => x.key === e.target.id)
-  }
+  const findIndex = (e) => {
+    return edu.findIndex(x => x.key === e.target.id)
+  };
 
-  onEdit = (e) => {
+  const onEdit = (e) => {
     e.preventDefault();
-    const index = this.findIndex(e);
+    const index = findIndex(e);
     const editID = e.target.id
-    const { name, title, start, end } = this.state.edu[index]
-    this.setState({
-      eduNewBtn: false,
-    })
-    this.setState({
-      eduName: name,
-      eduTitle: title,
-      eduStart: start,
-      eduEnd: end,
-      eduEdit: editID,
-      newDisplay: false,
-      eduNewForm: false
-    });
+    // this should work....
+    const { name, title, start, end } = edu[index]
+    setNewBtn(false);
+    setDisplay(false);
+    setNewForm(false);
+    setEduEdit(editID);
+    // Will this work?
+    setNameInput(name);
+    setTitleInput(title);
+    setStartInput(start);
+    setEndInput(end);
   };
 
-  onNew = () => {
-    this.setState({
-      eduNewBtn: false,
-      eduNewForm: true,
-      eduEdit: '',
-    })
+  const onNew = () => {
+    setNewBtn(false);
+    setNewForm(true);
+    setEduEdit('');
   }
 
-  render() {
-    const { edu, eduEdit, eduName, eduTitle, eduStart, eduEnd, eduDisplay, eduNewBtn, eduNewForm } = this.state
-    return (
-      <div >
-        {eduDisplay ? <EduForm eduName={eduName} eduTitle={eduTitle} eduStart={eduStart} eduEnd={eduEnd} eduEdit={eduEdit} onUpdateEdu={this.onUpdateEdu} onSubmitEdu={this.onSubmitEdu} handleInputChange={this.handleInputChange} /> 
-          : <EduFill edu={edu} eduName={eduName} eduTitle={eduTitle} eduStart={eduStart} eduEnd={eduEnd} eduEdit={eduEdit} onUpdateEdu={this.onUpdateEdu} onSubmitEdu={this.onSubmitEdu} handleInputChange={this.handleInputChange} onEdit={this.onEdit} />}
-        {eduNewBtn ? <button onClick={this.onNew}>New Education</button> : null}
-        {eduNewForm ? <EduForm eduName={eduName} eduTitle={eduTitle} eduStart={eduStart} eduEnd={eduEnd} eduEdit={eduEdit} onUpdateEdu={this.onUpdateEdu} onSubmitEdu={this.onSubmitEdu} handleInputChange={this.handleInputChange}/> 
-          : null}
-      </div>
-    )
-  }
+  return (
+    <div >
+      {display ? <EduForm nameInput={nameInput} titleInput={titleInput} startInput={startInput} endInput={endInput} eduEdit={eduEdit} onUpdateEdu={onUpdateEdu} onSubmitEdu={onSubmitEdu} handleInputName={handleInputName} handleInputTitle={handleInputTitle} handleInputStart={handleInputStart} handleInputEnd={handleInputEnd} /> 
+        : <EduFill edu={edu} nameInput={nameInput} titleInput={titleInput} startInput={startInput} endInput={endInput} eduEdit={eduEdit} onUpdateEdu={onUpdateEdu} onSubmitEdu={onSubmitEdu} onEdit={onEdit} handleInputName={handleInputName} handleInputTitle={handleInputTitle} handleInputStart={handleInputStart} handleInputEnd={handleInputEnd} />}
+      {newBtn ? <button onClick={onNew}>New Education</button> : null}
+      {newForm ? <EduForm nameInput={nameInput} titleInput={titleInput} startInput={startInput} endInput={endInput} eduEdit={eduEdit} onUpdateEdu={onUpdateEdu} onSubmitEdu={onSubmitEdu} handleInputName={handleInputName} handleInputTitle={handleInputTitle} handleInputStart={handleInputStart} handleInputEnd={handleInputEnd}/> 
+        : null}
+    </div>
+  )
+
 }
 
 export default Education;
