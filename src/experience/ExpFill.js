@@ -3,13 +3,13 @@ import ExpForm from './ExpForm'
 import uniqid from 'uniqid';
 
 const ExpFill = (props) => {
-  const { exp, expEdit, expName, expTitle, expTasks, expStart, expEnd, onEdit, onUpdateExp, onSubmitExp, handleInputChange } = props;
+  const { exp, expEdit, nameInput, titleInput, tasksInput, startInput, endInput, onEdit, onUpdateExp, onSubmitExp, handleInputName, handleInputTitle, handleInputTask, handleInputStart, handleInputEnd } = props;
   return (
     <div>
       {exp.map((x) => {
         if (expEdit === x.key) {
           return (
-            <ExpForm key='UniqIdHasFailedMe' expName={expName} expTitle={expTitle} expTasks={expTasks} expStart={expStart} expEnd={expEnd} expEdit={expEdit} onUpdateExp={onUpdateExp} onSubmitExp={onSubmitExp} handleInputChange={handleInputChange} />
+            <ExpForm key='UniqIdHasFailedMe' nameInput={nameInput} titleInput={titleInput} tasksInput={tasksInput} startInput={startInput} endInput={endInput} expEdit={expEdit} onUpdateExp={onUpdateExp} onSubmitExp={onSubmitExp} handleInputName={handleInputName} handleInputTitle={handleInputTitle} handleInputTask={handleInputTask} handleInputStart={handleInputStart} handleInputEnd={handleInputEnd} />
           );
         } else {
         return (
